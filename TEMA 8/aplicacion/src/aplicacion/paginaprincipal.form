@@ -21,46 +21,24 @@
             <Property name="text" type="java.lang.String" value="Personas"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu3">
+            <MenuItem class="javax.swing.JMenuItem" name="jbAlta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu4">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAltaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jbModificar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listado"/>
-              </Properties>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu5">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jbBaja">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Por n&#xfa;mero de empleado"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Por contrato"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Por departamento"/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">

@@ -13,6 +13,26 @@ public class Personal {
     private String nombre;
     private String password;
     
+    
+    private Contrato c;
+    private Departamento d;
+
+    public Contrato getC() {
+        return c;
+    }
+
+    public void setC(Contrato c) {
+        this.c = c;
+    }
+
+    public Departamento getD() {
+        return d;
+    }
+
+    public void setD(Departamento d) {
+        this.d = d;
+        d.setlistaPersona(this);
+    }
     public Personal(){
     
     }

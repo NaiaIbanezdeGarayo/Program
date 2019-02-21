@@ -5,12 +5,24 @@
  */
 package aplicacion;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Naia
  */
 public class Departamento {
     private String nombreDepartamento;
+    private ArrayList<Empleado> listaPersona;
+
+    public ArrayList<Empleado> getListaPersona() {
+        return listaPersona;
+    }
+
+    public void setListaPersona(ArrayList<Empleado> listaPersona) {
+        this.listaPersona.add(p);
+    }
+    
     
     public Departamento(String nombreDepartamento) {
         this.nombreDepartamento = nombreDepartamento;

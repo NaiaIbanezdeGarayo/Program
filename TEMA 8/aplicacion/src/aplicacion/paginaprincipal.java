@@ -33,13 +33,9 @@ public class paginaprincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jbAlta = new javax.swing.JMenuItem();
+        jbModificar = new javax.swing.JMenuItem();
+        jbBaja = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,32 +47,19 @@ public class paginaprincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Personas");
 
-        jMenu3.setText("Alta");
-        jMenu1.add(jMenu3);
-
-        jMenu4.setText("Modificación");
-        jMenu1.add(jMenu4);
-
-        jMenu6.setText("Listado");
-        jMenu1.add(jMenu6);
-
-        jMenu5.setText("Baja");
-
-        jMenuItem2.setText("Por número de empleado");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jbAlta.setText("Alta");
+        jbAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jbAltaActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem2);
+        jMenu1.add(jbAlta);
 
-        jMenuItem1.setText("Por contrato");
-        jMenu5.add(jMenuItem1);
+        jbModificar.setText("Modificar");
+        jMenu1.add(jbModificar);
 
-        jMenuItem3.setText("Por departamento");
-        jMenu5.add(jMenuItem3);
-
-        jMenu1.add(jMenu5);
+        jbBaja.setText("Baja");
+        jMenu1.add(jbBaja);
 
         jMenuBar1.add(jMenu1);
 
@@ -111,9 +94,9 @@ public class paginaprincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
+        Aplicacion.crearVentanaAlta();
+    }//GEN-LAST:event_jbAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,15 +138,11 @@ public class paginaprincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JMenuItem jbAlta;
+    private javax.swing.JMenuItem jbBaja;
+    private javax.swing.JMenuItem jbModificar;
     // End of variables declaration//GEN-END:variables
 }
