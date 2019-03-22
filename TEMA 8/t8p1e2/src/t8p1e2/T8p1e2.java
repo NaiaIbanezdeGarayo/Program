@@ -1,74 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package t8p1e2;
 
-import vista.VentanaAltaPersona;
-import vista.VentanaListado;
 import java.util.ArrayList;
-import UML.*;
 
-public class T8p1e2 {
-    
-    private static ArrayList<Persona> listaPersonas;
-    private static ArrayList<Cursos> listaCursos;
-    private static VentanaAltaPersona vap;
-    private static VentanaListado vl;
-
+/**
+ *
+ * @author Naia
+ */
+public class T8P1E2 {
+    private static AltaPersona ap;
+    private static ListadoPersonas lp;
+    private static Persona persona;
+    public static ArrayList <Persona> listaPersona = new ArrayList<Persona>();
     public static void main(String[] args) {
-        // Simulación de la base de datos
-        listaPersonas = new ArrayList<Persona>();
+        abrirVentanAltaPersona();
         
-        vap = new VentanaAltaPersona();
-        vap.setVisible(true);
+    }
+
+    private static void abrirVentanAltaPersona() {
+        ap = new AltaPersona();
+        ap.setVisible(true);
     }
     
-    public static boolean validarDni(String dni){
-        // Comprobamos que no está repetido
-        int x;
-        for(x = 0; x < listaPersonas.size() && listaPersonas.get(x).getDni().compareTo(dni)!= 0; x++){}
-        if (x == listaPersonas.size())
-            return true;
-        return false;
+    public static void crearPersona(String nombre, String apellido, String dni) {
+        persona = new Persona();
+        persona.setNombre(nombre);
+        persona.setApellido(apellido);
+        persona.setDni(dni);
+        System.out.println(persona.toString());
+        listaPersona.add(persona);
     }
+     
     
-    public static boolean altaPersona(String nombre, String apellidos,String dni)
-    {
-        try
-        {
-            listaPersonas.add(new Persona(nombre,apellidos,dni));
-            return true;
-        }
-        catch(Exception e)
-        {
-            return false;
-        }
+    
+    public static void cerrarVentana(){
+        ap.dispose();
+        lp = new ListadoPersonas();
+        lp.setVisible(true);
     }
+   
     
-    public static void salir(){
-        // Eliminar la ventana
-        vap.dispose();
-        // Crear y mostrar la ventana de salida
-        vl = new VentanaListado(generarListado());
-        vl.setVisible(true);
-    }
     
-    public static String generarListado(){
-        String datos="";
-        for(int x = 0; x < listaPersonas.size(); x++)
-        {
-            datos += listaPersonas.get(x).getNombre() + "  " + listaPersonas.get(x).getApellidos() + "  " + listaPersonas.get(x).getDni() + " \n" ;
-        }
-        if (datos.compareTo("")== 0)
-            datos = "No hay datos que mostrar";
-        return datos;
+    
+    public static String mostrarPersonas(){
+        
+        String personass = listaPersona.toString();
+        
+        /*String personass="";
+        for (int i = 0; i < listaPersona.size(); i++) {
+          personass = listaPersona.get(i).toString()+ personass;
+          
+        }*/
+        return personass;
         
     }
     
-    public static void terminar(){
-        System.exit(0);
-    }
-
-    private static class Cursos {
-
-        public Cursos() {
-        }
-    }
 }
