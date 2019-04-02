@@ -6,6 +6,7 @@
 package Vista;
 
 import Main.T9P1E2;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -127,13 +128,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void miModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModificacionActionPerformed
-    T9P1E2.abrirVentanaModificacion();
+    String respuestaM = JOptionPane.showInputDialog("Que evento quieres modificar??");
+    T9P1E2.abrirVentanaModificacion(respuestaM);
     }//GEN-LAST:event_miModificacionActionPerformed
 
     private void miBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBajaActionPerformed
-    
+    String respuesta = JOptionPane.showInputDialog(null,"Que evento quieres borrar??");
+        
+    int confirmar = JOptionPane.showConfirmDialog(null,"Estas seguro que deseas borrarlo??");
+    if(confirmar == 0)
+    {
+        T9P1E2.borrarEvento(respuesta);
     }//GEN-LAST:event_miBajaActionPerformed
-
+    else{
+        JOptionPane.showMessageDialog(null, "Hecho! No vamos a borrar el evento");
+    } }
     /**
      * @param args the command line arguments
      */

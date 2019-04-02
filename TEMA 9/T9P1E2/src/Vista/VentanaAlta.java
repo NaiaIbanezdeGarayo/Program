@@ -6,9 +6,12 @@
 package Vista;
 
 import Main.T9P1E2;
+import UML.Evento;
 import Validaciones.Excepciones;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +20,26 @@ import javax.swing.JOptionPane;
  */
 public class VentanaAlta extends javax.swing.JFrame {
 
+    private boolean modificacion = false;
+
     /**
      * Creates new form VentanaAlta
      */
     public VentanaAlta() {
         initComponents();
     }
-
+    public VentanaAlta(Evento even){
+        initComponents();
+        tfNombre.setText(even.getNombre());
+        tfNombre.setEditable(false);
+        tfLugarEvento.setText(even.getLugarEvento());
+        dcFecha.setText(even.getFechaEvento().toString());
+        tcHoraInicio.setText(even.getHoraInicio().toString());
+        tcHoraFinalizacion.setText(even.getHoraFinal().toString());;
+        tfCapacidadPersonas.setText(even.getCapacidad());
+        
+        modificacion = true;
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,11 +67,11 @@ public class VentanaAlta extends javax.swing.JFrame {
         tfNombre = new javax.swing.JTextField();
         tfLugarEvento = new javax.swing.JTextField();
         tfCapacidadPersonas = new javax.swing.JTextField();
-        dcFecha = new com.toedter.calendar.JDateChooser();
-        tcHoraInicio = new lu.tudor.santec.jtimechooser.JTimeChooser();
-        tcHoraFinalizacion = new lu.tudor.santec.jtimechooser.JTimeChooser();
         bCrearEvento = new javax.swing.JButton();
         bCancelarEvento = new javax.swing.JButton();
+        tcHoraInicio = new javax.swing.JTextField();
+        tcHoraFinalizacion = new javax.swing.JTextField();
+        dcFecha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +116,17 @@ public class VentanaAlta extends javax.swing.JFrame {
             }
         });
 
+        tcHoraInicio.setText(" :  :");
+
+        tcHoraFinalizacion.setText("  :  :");
+        tcHoraFinalizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tcHoraFinalizacionActionPerformed(evt);
+            }
+        });
+
+        dcFecha.setText("/  /");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,18 +143,21 @@ public class VentanaAlta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tcHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                                .addComponent(tcHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
                                 .addComponent(jLabel6)
-                                .addGap(48, 48, 48)
-                                .addComponent(tcHoraFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tcHoraFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(36, 36, 36)
                                 .addComponent(tfCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(229, 229, 229)
+                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -137,10 +167,7 @@ public class VentanaAlta extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfNombre)
                                     .addComponent(tfLugarEvento)
-                                    .addComponent(dcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(229, 229, 229)
-                                .addComponent(jLabel1)))
+                                    .addComponent(dcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(190, 190, 190)
@@ -166,27 +193,21 @@ public class VentanaAlta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addComponent(tcHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(tfCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bCrearEvento)
-                            .addComponent(bCancelarEvento))
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(tcHoraFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(tcHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tcHoraFinalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfCapacidadPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bCrearEvento)
+                    .addComponent(bCancelarEvento))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -198,29 +219,42 @@ public class VentanaAlta extends javax.swing.JFrame {
 
     private void bCrearEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearEventoActionPerformed
        try{
-           if(tfNombre.getText().isEmpty())
+           if (tfNombre.getText().isEmpty())
             throw new Excepciones();
-           if(tfLugarEvento.getText().isEmpty())
+           if (tfLugarEvento.getText().isEmpty())
             throw new Excepciones();
-           if(dcFecha.getDateFormatString().isEmpty())
+           if (dcFecha.getText().isEmpty())
             throw new Excepciones();
-           if(tcHoraInicio.getFormatedTime().isEmpty())
+           if(tcHoraInicio.getText().isEmpty())
             throw new Excepciones();
-           if(tcHoraFinalizacion.getFormatedTime().isEmpty())
+           if(tcHoraFinalizacion.getText().isEmpty())
             throw new Excepciones();
            if(tfCapacidadPersonas.getText().isEmpty())
             throw new Excepciones();
+          if(modificacion = false) 
+          {
+              T9P1E2.guardarDatosEvento(tfNombre.getText(),tfLugarEvento.getText(), dcFecha.getText(),tcHoraInicio.getText() ,tcHoraFinalizacion.getText() , tfCapacidadPersonas.getText());
+          }
+          else
+              T9P1E2.modificarDatosEvento(tfNombre.getText(),tfLugarEvento.getText(), dcFecha.getText(),tcHoraInicio.getText() ,tcHoraFinalizacion.getText() , tfCapacidadPersonas.getText());
+          
        }
        catch(Excepciones e){
            JOptionPane.showMessageDialog(null, "Es obligatorio rellenar todos los huecos");
-       }
-       T9P1E2.guardarDatosEvento(tfNombre.getText(),tfLugarEvento.getText(), dcFecha.getDateFormatString(),tcHoraInicio.getFormatedTime() ,tcHoraFinalizacion.getFormatedTime() , tfCapacidadPersonas.getText());
+       } catch (Exception e) 
+       {
+         JOptionPane.showMessageDialog(null, "Error tipo: "+e.getCause());
+        }
        
     }//GEN-LAST:event_bCrearEventoActionPerformed
 
     private void bCancelarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarEventoActionPerformed
        System.exit(0);
     }//GEN-LAST:event_bCancelarEventoActionPerformed
+
+    private void tcHoraFinalizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcHoraFinalizacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tcHoraFinalizacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,7 +294,7 @@ public class VentanaAlta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCancelarEvento;
     private javax.swing.JButton bCrearEvento;
-    private com.toedter.calendar.JDateChooser dcFecha;
+    private javax.swing.JTextField dcFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -270,8 +304,8 @@ public class VentanaAlta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private lu.tudor.santec.jtimechooser.demo.JTimeChooserDemo jTimeChooserDemo1;
     private lu.tudor.santec.jtimechooser.demo.JTimeChooserDemo jTimeChooserDemo2;
-    private lu.tudor.santec.jtimechooser.JTimeChooser tcHoraFinalizacion;
-    private lu.tudor.santec.jtimechooser.JTimeChooser tcHoraInicio;
+    private javax.swing.JTextField tcHoraFinalizacion;
+    private javax.swing.JTextField tcHoraInicio;
     private com.qt.datapicker.TestDayPicker testDayPicker1;
     private com.qt.datapicker.TestDayPicker testDayPicker2;
     private com.qt.datapicker.TestDayPicker testDayPicker3;
@@ -282,4 +316,6 @@ public class VentanaAlta extends javax.swing.JFrame {
     private javax.swing.JTextField tfLugarEvento;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
+
+    
 }

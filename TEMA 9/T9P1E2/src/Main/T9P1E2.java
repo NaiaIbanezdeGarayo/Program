@@ -9,11 +9,11 @@ import BaseDatos.ConexionBD;
 import BaseDatos.EventosDAO;
 import UML.Evento;
 import Vista.VentanaAlta;
-import Vista.VentanaBaja;
-import Vista.VentanaModificacion;
 import Vista.VentanaPrincipal;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -28,12 +28,11 @@ public class T9P1E2 {
     
     public static VentanaPrincipal vp;
     public static VentanaAlta va;
-    public static VentanaModificacion vm;
-    public static VentanaBaja vb;
     public static EventosDAO cBD;
-    public static Evento ev;
+    public static Evento even;
     
     public static void main(String[] args) {
+        cBD = new EventosDAO();
         abrirVentanaPrincipal();
     }
 
@@ -50,29 +49,79 @@ public class T9P1E2 {
         va.setVisible(true);
         
     }
-    public static void abrirVentanaModificacion(){
+    public static void abrirVentanaModificacion(String respuestaM){
+        even = cBD.consultarEvento(respuestaM);
+        
         vp.dispose();
-        vm= new VentanaModificacion();
-        vm.setVisible(true);
+        va= new VentanaAlta(even);
+        va.setVisible(true);
+        
+        
     }
     
-    public static void guardarDatosEvento(String n, String l, String fe, String hI, String hF,String c) {
-      ev = new Evento();  
-      ev.setNombre(n);
-      ev.setLugarEvento(l);
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-      LocalDate f = LocalDate.parse(fe,formatter); 
-      ev.setFechaEvento(f);
-      DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-      LocalTime hi = LocalTime.parse(hI,formatTime);
-      ev.setHoraInicio(hi);
-      LocalTime hf = LocalTime.parse(hF,formatTime);
-      ev.setHoraFinal(hi);
+    public static void guardarDatosEvento(String nombre, String lugarEvento, String fechaEvento, String horaInicio, String horaFinal,String capacidad) throws Exception {
+     
+     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+      //LocalDate f = LocalDate.parse(fechaEvento,formatter); 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date f = formatter.parse(fechaEvento);
+        java.sql.Date fecha =new java.sql.Date(f.getTime());
+        
+        SimpleDateFormat formatte = new SimpleDateFormat("HH:mm:ss");
+        long hI = formatte.parse(horaInicio).getTime();
+        java.sql.Time horaI =new Time(hI);
+        
+        
+        
+        long hF = formatte.parse(horaFinal).getTime();
+        java.sql.Time horaF =new Time(hF);
+     
+      //DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+      //LocalTime hi = LocalTime.parse(horaInicio,formatTime);
+     
+      //LocalTime hf = LocalTime.parse(horaFinal,formatTime);
+     
+      even = new Evento (nombre,lugarEvento,fecha,horaI,horaF,capacidad);
+      cBD.registrarEventos(even);
       
-      cBD.registrarEventos(ev);
       JOptionPane.showMessageDialog(null,"Se ha creado el evento");
       va.dispose();
       
+    }
+
+
+    public static void borrarEvento(String respuesta) {
+        cBD.borrarEventos(respuesta);
+        JOptionPane.showMessageDialog(null,"Se ha borrado el evento");
+    }
+
+    public static void modificarDatosEvento(String nombre, String lugarEvento, String fechaEvento, String horaInicio, String horaFinal,String capacidad) throws Exception {
+     // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+      //LocalDate f = LocalDate.parse(fechaEvento,formatter); 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date f = formatter.parse(fechaEvento);
+        java.sql.Date fecha =new java.sql.Date(f.getTime());
+        
+        SimpleDateFormat formatte = new SimpleDateFormat("HH:mm:ss");
+        long hI = formatte.parse(horaInicio).getTime();
+        java.sql.Time horaI =new Time(hI);
+        
+        
+        
+        long hF = formatte.parse(horaFinal).getTime();
+        java.sql.Time horaF =new Time(hF);
+     
+      //DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+      //LocalTime hi = LocalTime.parse(horaInicio,formatTime);
+     
+      //LocalTime hf = LocalTime.parse(horaFinal,formatTime);
+     
+      even = new Evento (nombre,lugarEvento,fecha,horaI,horaF,capacidad);
+      cBD.modificarEventos(even);
+      
+      JOptionPane.showMessageDialog(null,"Se ha modificado el evento");
+      va.dispose(); 
+        
     }
 
     

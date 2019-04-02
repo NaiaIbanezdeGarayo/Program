@@ -5,6 +5,8 @@
  */
 package UML;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,12 +17,12 @@ import java.time.LocalTime;
 public class Evento {
     private String nombre;
     private String lugarEvento;
-    private LocalDate fechaEvento;
-    private LocalTime horaInicio;
-    private LocalTime horaFinal;
+    private Date fechaEvento;
+    private Time horaInicio;
+    private Time horaFinal;
     private String capacidad;
 
-    public Evento(String nombre, String lugarEvento, LocalDate fechaEvento, LocalTime horaInicio, LocalTime horaFinal, String capacidad) {
+    public Evento(String nombre, String lugarEvento, Date fechaEvento, Time horaInicio, Time horaFinal, String capacidad) {
         this.nombre = nombre;
         this.lugarEvento = lugarEvento;
         this.fechaEvento = fechaEvento;
@@ -32,6 +34,8 @@ public class Evento {
     public Evento() {
        
     }
+
+
 
     public String getNombre() {
         return nombre;
@@ -49,27 +53,27 @@ public class Evento {
         this.lugarEvento = lugarEvento;
     }
 
-    public LocalDate getFechaEvento() {
+    public Date getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(LocalDate fechaEvento) {
+    public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
-    public LocalTime getHoraInicio() {
+    public Time getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) {
+    public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public LocalTime getHoraFinal() {
+    public Time getHoraFinal() {
         return horaFinal;
     }
 
-    public void setHoraFinal(LocalTime horaFinal) {
+    public void setHoraFinal(Time horaFinal) {
         this.horaFinal = horaFinal;
     }
 

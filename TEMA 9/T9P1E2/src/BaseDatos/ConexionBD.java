@@ -14,7 +14,7 @@ public class ConexionBD {
     private String bd = "eventos";
     private String login = "root";
     private String password = "usbw";
-    private String url = "jdbc:mysql://localhost:3306/"+bd;
+    private String url = "jdbc:mysql://localhost:3307/"+bd;
     
     // constantes???
     // Parametros para el constructor??
